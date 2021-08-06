@@ -1,0 +1,44 @@
+Solution:
+
+The strategy for this solution can be designed by distributing wine bottles to 10 prisoners in such a way that there should be at least one thousand different combinations. First we will label all the 1000 bottles with numbers from 0 to 999.
+Now let's distribute wine bottles systematically
+A = prisoner A will drink from every other bottle i.e. skipping every 1 bottle.(0,2,4,.....) 
+B = prisoner B will drink from every other two bottles i.e. skipping every 2 bottles.(0,1,4,5,8,9.....) 
+C = prisoner C will drink from every other four bottles i.e. skipping every 4 bottles.(0-3,8-11,.....) 
+D = prisoner D will drink from every other eight bottles i.e. skipping every 8 bottles.(0-7,16-23,.....) 
+E = prisoner E will drink from every other sixteen bottles i.e. skipping every 16 bottles.(0-15,32-47,.....) 
+F = prisoner F will drink from every other thirty two bottles i.e. skipping every 32 bottles.(0-31,64-95,.....) 
+G = prisoner G will drink from every other sixty four bottles i.e. skipping every 64 bottles.(0-63,128-191,.....) 
+H = prisoner H will drink from every other one hundred and twenty eight bottles i.e. skipping every 128 bottles.(0-127,256-383,.....) 
+I = prisoner I will drink from every other two hundred and fifty six bottles i.e. skipping every 256 bottles.(0-255,512-.....) 
+J = prisoner J will drink from every other five hundred and twelve bottles i.e. first 512 bottles.(0-512) 
+
+If we observe the pattern for every prisoner the bottle assignments reflect powers of 2.
+
+         A	 B	 C	 D	 E	 F	 G	 H	 I	 J
+	2^0	2^1	2^2	2^3	2^4	2^5	2^6	2^7	2^8	2^9
+
+Now if we calculate total number of combinations it will ne 2^9 = 1024 different combinations which are more than sufficient for testing 1000 bottles. If we reverse the above pattern  it matches the binary place-value system.
+
+	 J	 I	 H	 G	 F	 E	 D	 C	 B	 A
+	2^9	2^8	2^7	2^6	2^5	2^4	2^3	2^2	2^1	2^0
+
+We will look at the pattern of poisoned prisoners encoded in binary. Also there can be only two outcomes for each prisoner either dead or alive. So we will place 0 below the prisoners who are dead, and 1 below those who are alive.
+
+Example 1:
+
+	 J	 I	 H	 G	 F	 E	 D	 C	 B	 A
+	2^9	2^8	2^7	2^6	2^5	2^4	2^3	2^2	2^1	2^0
+	 0	 0	 0	 0	 0	 0 	 0 	 0 	 0  	 0
+
+Let's suppose all prisoners died. So we will place 0 below all of them. Now if we convert binary number 0000000000 into decimal number it will be 0th bottle. This output is true in accordance to our distribution because all prisoners drank wine from 0th bottle.
+
+Example 2:
+
+	 J	 I	 H	 G	 F	 E	 D	 C	 B	 A
+	2^9	2^8	2^7	2^6	2^5	2^4	2^3	2^2	2^1	2^0
+	 0	 1	 1	 0	 0	 1 	 0 	 0 	 0  	 1
+
+Now let's suppose prisoner J,G,F,D,C and B died . Now if we convert the binary number 0110010001 into decimal number it will be 401. It means that 401th bottle is poisoned.
+
+

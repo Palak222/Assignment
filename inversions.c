@@ -1,36 +1,74 @@
 #include<stdio.h>
-#include<stdlib.h>
 
-int sort(int *arr, int n){
-	
-	int count = 0, temp = 0;
-	int i,j;
-	for(i = 0; i < n-1; i++){
+int merge(int a[], int, int, int);
+int mergeSort(int a[], int, int);
 
-		for(j = i+1; j < n; j++){
+int merge(int a[], int l, int m, int h)
+{
 
-			if(arr[i] > arr[j]){
+        int li = l;
+        int mi = m + 1;
+        int i = l;
+        int temp[100], k;
+        int count = 0;
 
-				temp = arr[i];
-				arr[i] = arr[j];
-				arr[j] = temp;
-				count++;
-			}
-		}
-	}
-	return count;
+        while(li <= m && mi <= h)
+        {
+                if(a[li] <= a[mi])
+                {
+                        temp[i] = a[li];
+                        li++;
+                }
+                else
+                {
+                        count += (m - li + 1);
+                        temp[i] = a[mi];
+                        mi++;
+                }
+                i++;
+        }
+        if(i > m)
+        {
+                for(k = mi; k <= h; k++)
+                        temp[i] = a[k];
+                        i++;
+        }
+        else
+        {
+                for(k = li; k<= m; k++)
+                        temp[i] = a[k];
+                        i++;
+        }
+
+        return count;
+
 }
 
-void main(){
+int mergeSort(int a[], int l, int h)
+{
+        int inv_count = 0;
 
-	int n, a[30];
-	printf("Enter number of elements: ");
-	scanf("%d", &n);
+        if(l < h)
+        {
+                int m = (l + h) / 2;
 
-	for(int i = 0; i < n; i++){
+                inv_count += mergeSort(a, l, m);
+                inv_count += mergeSort(a, m + 1, h);
 
-		scanf("%d", &a[i]); 
-	}
+                inv_count += merge(a, l, m, h);
+        }
 
-	printf("%d ", sort(a, n));
+        return inv_count;
+}
+
+int main()
+{
+
+        int arr[4] = {8, 4, 2, 1};
+
+        int result = mergeSort(arr, 0, 3);
+
+        printf("%d ", result);
+
+        return 0;
 }

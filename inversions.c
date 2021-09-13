@@ -27,13 +27,13 @@ int merge(int a[], int l, int m, int h)
                 }
                 i++;
         }
-        if(i > m)
+        if(li > m)
         {
                 for(k = mi; k <= h; k++)
                         temp[i] = a[k];
                         i++;
         }
-        else
+        if(mi > h)
         {
                 for(k = li; k<= m; k++)
                         temp[i] = a[k];
